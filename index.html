@@ -9,25 +9,74 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <!-- ============ NAVBAR ============ -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-city"></i>
-                <span>Kelurahan Pasar Melintang</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Beranda</a></li>
-                <li><a href="profil.html"><i class="fas fa-info-circle"></i> Profil</a></li>
-                <li><a href="struktur.html"><i class="fas fa-users"></i> Struktur</a></li>
-                <li><a href="layanan.html"><i class="fas fa-concierge-bell"></i> Layanan</a></li>
-                <li><a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <i class="fas fa-city"></i>
+            <span>Kelurahan Pasar Melintang</span>
         </div>
-    </nav>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+            <li><a href="struktur.html"><i class="fas fa-users"></i> Struktur Organisasi</a></li>
+            <li><a href="profil.html"><i class="fas fa-info-circle"></i> Struktur RT & RW</a></li>
+            <li><a href="layanan.html"><i class="fas fa-concierge-bell"></i> Layanan</a></li>
+            <li><a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a></li>
+        </ul>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
+
+<style>
+/* Base Menu (Tidak Aktif/Transparan) */
+.nav-menu li a {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+    background: transparent !important;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Hover Menu yang Tidak Aktif */
+.nav-menu li a:hover:not(.active) {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-2px);
+}
+
+/* Tombol Aktif (Berwarna/Di-klik) */
+.nav-menu li a.active {
+    color: #ffffff !important;
+    background: var(--accent, #0a9396) !important;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const currentLocation = window.location.pathname.split("/").pop();
+    const menuItems = document.querySelectorAll("#navMenu li a");
+
+    menuItems.forEach(item => {
+        const href = item.getAttribute("href");
+        
+        // Hapus kelas active bawaan
+        item.classList.remove("active");
+        
+        // Cek halaman aktif
+        if (href === currentLocation || (currentLocation === "" && href === "index.html")) {
+            item.classList.add("active");
+        }
+    });
+});
+</script>
 
     <!-- ============ HERO SECTION ============ -->
     <header class="hero">
@@ -36,12 +85,12 @@
                 <h1 class="fade-in">Kelurahan Pasar Melintang</h1>
                 <p class="fade-in-delay">"Melayani dengan Hati, Membangun dengan Karya"</p>
                 <div class="hero-buttons fade-in-delay2">
-                    <a href="profil.html" class="btn-primary"><i class="fas fa-chevron-circle-right"></i> Kenali Kami</a>
+                    <a href="layanan.html" class="btn-primary"><i class="fas fa-chevron-circle-right"></i> Kenali Kami</a>
                     <a href="kontak.html" class="btn-secondary"><i class="fas fa-phone"></i> Hubungi Kami</a>
                 </div>
             </div>
             <div class="hero-image fade-in">
-                <img src="assets/img/1.jpg" alt="Kantor Kelurahan">
+                <img src="assets/img/kkn.jpeg" alt="Kantor Kelurahan">
             </div>
         </div>
         <div class="hero-wave">
@@ -51,36 +100,6 @@
         </div>
     </header>
 
-    <!-- ============ ABOUT PREVIEW ============ -->
-    <section class="about-preview">
-        <div class="container">
-            <div class="section-title">
-                <h2>Tentang Kelurahan</h2>
-                <div class="title-line"></div>
-                <p>Mengenal lebih dekat Kelurahan Pasar Melintang</p>
-            </div>
-            <div class="about-grid">
-                <div class="about-card slide-up">
-                    <i class="fas fa-landmark"></i>
-                    <h3>Sejarah</h3>
-                    <p>Berdiri sejak tahun 1980, Kelurahan Pasar Melintang telah menjadi pusat pelayanan masyarakat di Kecamatan...</p>
-                    <a href="profil.html">Selengkapnya →</a>
-                </div>
-                <div class="about-card slide-up-delay">
-                    <i class="fas fa-bullseye"></i>
-                    <h3>Visi & Misi</h3>
-                    <p>Mewujudkan kelurahan yang mandiri, sejahtera, dan berbudaya dengan pelayanan prima kepada masyarakat.</p>
-                    <a href="profil.html">Selengkapnya →</a>
-                </div>
-                <div class="about-card slide-up-delay2">
-                    <i class="fas fa-handshake"></i>
-                    <h3>Pelayanan</h3>
-                    <p>Kami berkomitmen memberikan pelayanan cepat, transparan, dan ramah bagi seluruh warga.</p>
-                    <a href="layanan.html">Selengkapnya →</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- ============ INFO TERKINI ============ -->
     <section class="info-section">
@@ -89,17 +108,18 @@
                 <div class="info-card zoom-in">
                     <i class="fas fa-clock"></i>
                     <h4>Jam Pelayanan</h4>
-                    <p>Senin - Jumat<br>08.00 - 16.00 WIB</p>
+                     <ul>Senin - Kamis : 07.45 – 16.15 WIB</ul>
+                     <ul>Jumat : 07.45 – 16.45 WIB</ul>
                 </div>
                 <div class="info-card zoom-in-delay">
                     <i class="fas fa-map-marker-alt"></i>
                     <h4>Alamat</h4>
-                    <p>Jl. Pasar Melintang No. 1<br>Kecamatan Melintang, Kabupaten</p>
+                    <p>Jl. Letkol Santoso RT.04/ RW.02<br>Kel. Pasar Melintang, Kec. Teluk Segara, Kota Bengkulu</p>
                 </div>
                 <div class="info-card zoom-in-delay2">
                     <i class="fas fa-phone-alt"></i>
                     <h4>Kontak</h4>
-                    <p>📞 (021) 1234-5678<br>📧 kelurahan@pmelintang.go.id</p>
+                    <p>📞 082377943232<br>📧 kelurahanpasarmelintan@gmail.com</p>
                 </div>
             </div>
         </div>
@@ -109,25 +129,27 @@
     <section class="gallery-section">
         <div class="container">
             <div class="section-title">
-                <h2>Kegiatan Terkini</h2>
+                <h2>Dokumentasi Kegiatan</h2>
                 <div class="title-line"></div>
                 <p>Dokumentasi kegiatan Kelurahan Pasar Melintang</p>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item scale-in">
-                    <img src="assets/img/2.jpg" alt="Kegiatan 1">
+              
+                
+                  <div class="gallery-item scale-in">
+                    <img src="assets/img/snm.jpeg" alt="Kegiatan 1">
                     <div class="gallery-overlay">
-                        <span>Gotong Royong</span>
+                        <span>senam pagi</span>
                     </div>
                 </div>
                 <div class="gallery-item scale-in-delay">
-                    <img src="assets/img/3.jpg" alt="Kegiatan 2">
+                    <img src="assets/img/sosialisasi.jpeg" alt="Kegiatan 2">
                     <div class="gallery-overlay">
-                        <span>Rapat Warga</span>
+                        <span>sosialisasi</span>
                     </div>
                 </div>
                 <div class="gallery-item scale-in-delay2">
-                    <img src="assets/img/4.jpg" alt="Kegiatan 3">
+                    <img src="assets/img/posyandu.jpeg" alt="Kegiatan 3">
                     <div class="gallery-overlay">
                         <span>Posyandu</span>
                     </div>
@@ -136,42 +158,48 @@
         </div>
     </section>
 
-    <!-- ============ FOOTER ============ -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <h3><i class="fas fa-city"></i> Kelurahan Pasar Melintang</h3>
-                    <p>Berkomitmen melayani masyarakat dengan profesional dan penuh dedikasi.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <h4>Menu</h4>
-                    <ul>
-                        <li><a href="index.html">Beranda</a></li>
-                        <li><a href="profil.html">Profil</a></li>
-                        <li><a href="struktur.html">Struktur</a></li>
-                        <li><a href="layanan.html">Layanan</a></li>
-                        <li><a href="kontak.html">Kontak</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h4>Hubungi Kami</h4>
-                    <p><i class="fas fa-map-pin"></i> Jl. Pasar Melintang No. 1</p>
-                    <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
-                    <p><i class="fas fa-envelope"></i> kelurahan@pmelintang.go.id</p>
-                </div>
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <h3><i class="fas fa-city"></i> Kelurahan Pasar Melintang</h3>
+                <p>Berkomitmen melayani masyarakat dengan profesional dan penuh dedikasi.</p>
+                <p>Website ini dibuat oleh KKN UMB 57:
+                   <ul>1. Korin Kesuma Ningrum (Sistem Informasi)</ul> 
+                   <ul> 2. Dea Imelda Lika (Sistem Informasi)</ul>
+                </p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Kelurahan Pasar Melintang. Dibuat untuk KKN.</p>
+            <div class="footer-links">
+                <h4>Menu</h4>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="struktur.html">Struktur Organisasi</a></li>
+                    <li><a href="profil.html">Struktur RT & RW</a></li>
+                    <li><a href="layanan.html">Layanan</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Hubungi Kami</h4>
+                <p><i class="fas fa-map-pin"></i>Jl. Letkol Santoso RT.04, Kel. Pasar Melintang, Kec. Teluk Segara</p>
+                <p><i class="fas fa-phone"></i> 082377943232</p>
+                <p><i class="fas fa-envelope"></i> kelurahanpasarmelintan@gmail.com</p>
             </div>
         </div>
-    </footer>
+        <div class="footer-bottom">
+            <p id="footer-text">&copy; 2026 Kelurahan Pasar Melintang. @kkn umb 57</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const footerText = document.getElementById("footer-text");
+        if (footerText) {
+            footerText.innerHTML = "&copy; 2026 Kelurahan Pasar Melintang. @kkn umb 57";
+        }
+    });
+</script>
 
     <script src="js/script.js"></script>
 </body>

@@ -4,90 +4,375 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontak - Kelurahan Pasar Melintang</title>
+    
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <style>
+        /* =========================================================
+           HERO MINIMALIS & BUTTON BACK
+           ========================================================= */
+        .hero-minimal {
+            position: relative;
+            padding: 90px 20px 45px;
+            background: linear-gradient(135deg, var(--primary-color, #005f73), var(--secondary-color, #0a9396));
+            color: #ffffff;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn-back-wrapper {
+            margin: 0;
+            padding: 0;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .btn-back:hover {
+            background-color: #ffffff;
+            color: var(--primary-color, #005f73);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-text-minimal {
+            text-align: center;
+        }
+
+        .hero-text-minimal h1 {
+            font-size: 2.2rem;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-text-minimal p {
+            font-size: 1rem;
+            margin: 0;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* =========================================================
+           SECTION KONTAK & MAPS (SIDE BY SIDE LAYOUT)
+           ========================================================= */
+        .contact-section {
+            padding: 60px 20px 80px;
+            background: var(--bg-light, #f8f9fa);
+        }
+
+        .contact-container {
+            max-width: 1150px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Maps Kiri, Info Kanan */
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        /* SISI KIRI: MAPS CARD */
+        .map-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            min-height: 420px;
+        }
+
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(10%) contrast(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .map-wrapper:hover iframe {
+            filter: grayscale(0%);
+        }
+
+        /* SISI KANAN: LAYOUT DENGAN CARD INFORMASI KONTAK */
+        .info-container-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            justify-content: space-between;
+        }
+
+        .contact-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 100%;
+        }
+
+        a.contact-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+            border-color: rgba(10, 147, 150, 0.3);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e0f2f1, #b2dfdb);
+            color: var(--primary-color, #005f73);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        a.contact-card:hover .card-icon {
+            background: linear-gradient(135deg, var(--primary-color, #005f73), var(--secondary-color, #0a9396));
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .card-content label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #8d99ae;
+            letter-spacing: 0.8px;
+        }
+
+        .card-content span {
+            font-size: 0.95rem;
+            color: #2b2d42;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+
+
+        /* =========================================================
+           RESPONSIF TABLET & MOBILE
+           ========================================================= */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr; /* Tumpuk vertikal di layar sedang/kecil */
+                gap: 25px;
+            }
+
+            .map-card {
+                min-height: 350px;
+                order: 2; /* Peta di bawah saat tampilan HP agar informasi terbaca dulu */
+            }
+
+            .info-container-right {
+                order: 1;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-card {
+                padding: 16px 20px;
+            }
+
+            .hero-text-minimal h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar (sama) -->
-    <nav class="navbar"> ... </nav>
 
-    <!-- Hero Mini -->
-    <header class="hero" style="min-height: 40vh; padding: 120px 0 60px;">
-        <div class="hero-content" style="grid-template-columns: 1fr;">
-            <div class="hero-text text-center">
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <i class="fas fa-city"></i>
+            <span>Kelurahan Pasar Melintang</span>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+            <li><a href="struktur.html"><i class="fas fa-users"></i> Struktur Organisasi</a></li>
+            <li><a href="profil.html"><i class="fas fa-info-circle"></i> Struktur RT & RW</a></li>
+            <li><a href="layanan.html"><i class="fas fa-concierge-bell"></i> Layanan</a></li>
+            <li><a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a></li>
+        </ul>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
+
+<style>
+/* Base Menu (Tidak Aktif/Transparan) */
+.nav-menu li a {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+    background: transparent !important;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Hover Menu yang Tidak Aktif */
+.nav-menu li a:hover:not(.active) {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-2px);
+}
+
+/* Tombol Aktif (Berwarna/Di-klik) */
+.nav-menu li a.active {
+    color: #ffffff !important;
+    background: var(--accent, #0a9396) !important;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const currentLocation = window.location.pathname.split("/").pop();
+    const menuItems = document.querySelectorAll("#navMenu li a");
+
+    menuItems.forEach(item => {
+        const href = item.getAttribute("href");
+        
+        // Hapus kelas active bawaan
+        item.classList.remove("active");
+        
+        // Cek halaman aktif
+        if (href === currentLocation || (currentLocation === "" && href === "index.html")) {
+            item.classList.add("active");
+        }
+    });
+});
+</script>
+    <header class="hero-minimal">
+        <div class="hero-container">
+            <div class="btn-back-wrapper">
+                <a href="index.html" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
+            </div>
+            <div class="hero-text-minimal">
                 <h1>Hubungi Kami</h1>
-                <p>Sampaikan aspirasi atau kebutuhan Anda</p>
+                <p>Informasi kontak resmi dan lokasi Kantor Kelurahan Pasar Melintang</p>
             </div>
         </div>
-        <div class="hero-wave"> ... </div>
     </header>
 
-    <!-- Konten Kontak -->
-    <section style="padding: 60px 0; background: var(--white);">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto;">
-                <!-- Info Kontak -->
-                <div>
-                    <h2 style="color: var(--primary); margin-bottom: 25px;">Informasi Kontak</h2>
-                    <div style="margin-bottom: 25px;">
-                        <p style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                            <i class="fas fa-map-marker-alt" style="font-size: 1.4rem; color: var(--accent); width: 30px;"></i>
-                            <span>Jl. Pasar Melintang No. 1, Kecamatan Melintang</span>
-                        </p>
-                        <p style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                            <i class="fas fa-phone" style="font-size: 1.4rem; color: var(--accent); width: 30px;"></i>
-                            <span>(021) 1234-5678</span>
-                        </p>
-                        <p style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                            <i class="fas fa-envelope" style="font-size: 1.4rem; color: var(--accent); width: 30px;"></i>
-                            <span>kelurahan@pmelintang.go.id</span>
-                        </p>
-                        <p style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                            <i class="fas fa-clock" style="font-size: 1.4rem; color: var(--accent); width: 30px;"></i>
-                            <span>Senin-Jumat: 08.00-16.00 WIB</span>
-                        </p>
-                    </div>
-                    
-                    <!-- Google Maps Embed -->
-                    <div style="border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); margin-top: 20px;">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.5!2d101.4!3d0.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMzAnMDAuMCJOIDEwMcKwMjQnMDAuMCJF!5e0!3m2!1sid!2sid!4v1234567890" 
-                            width="100%" 
-                            height="250" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy">
-                        </iframe>
-                    </div>
-                </div>
-                
-                <!-- Form Kontak -->
-                <div style="background: var(--light); padding: 35px; border-radius: var(--radius);">
-                    <h2 style="color: var(--primary); margin-bottom: 25px;">Kirim Pesan</h2>
-                    <form>
-                        <div style="margin-bottom: 18px;">
-                            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Nama Lengkap</label>
-                            <input type="text" placeholder="Masukkan nama Anda" style="width: 100%; padding: 12px 16px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: var(--transition);">
-                        </div>
-                        <div style="margin-bottom: 18px;">
-                            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Email</label>
-                            <input type="email" placeholder="Masukkan email Anda" style="width: 100%; padding: 12px 16px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; transition: var(--transition);">
-                        </div>
-                        <div style="margin-bottom: 18px;">
-                            <label style="display: block; font-weight: 600; margin-bottom: 6px;">Pesan</label>
-                            <textarea rows="5" placeholder="Tulis pesan Anda..." style="width: 100%; padding: 12px 16px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; resize: vertical; transition: var(--transition);"></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary" style="width: 100%; border: none; cursor: pointer;">
-                            <i class="fas fa-paper-plane"></i> Kirim Pesan
-                        </button>
-                    </form>
+    <section class="contact-section">
+        <div class="contact-container">
+
+            <div class="map-card">
+                <div class="map-wrapper">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248.8171162091835!2d102.25667384899523!3d-3.794084024062127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e36b0219867a09b%3A0xe256b3e9dfc6725f!2sKantor%20Lurah%20Pasar%20Melintang!5e0!3m2!1sen!2sid!4v1788756453592!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" 
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin">
+                    </iframe>
                 </div>
             </div>
+
+            <div class="info-container-right">
+                
+                <div class="contact-card">
+                    <div class="card-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <label>Alamat Kantor</label>
+                        <span>Jl. Letkol Santoso RT.04/ RW.02, Kel. Pasar Melintang, Kec. Teluk Segara, Kota Bengkulu 38114</span>
+                    </div>
+                </div>
+
+                <a href="tel:02112345678" class="contact-card">
+                    <div class="card-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="card-content">
+                        <label>Telepon / Whatsapp</label>
+                        <span>082377943232</span>
+                    </div>
+                </a>
+
+                <a href="mailto:kelurahan@pmelintang.go.id" class="contact-card">
+                    <div class="card-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="card-content">
+                        <label>Email Resmi</label>
+                        <span>kelurahanpasarmelintan@gmail.com</span>
+                    </div>
+                </a>
+
+                <div class="contact-card">
+                    <div class="card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="card-content">
+                        <label>Jam Operasional</label>
+                         <ul>Senin - Kamis : 07.45 – 16.15 WIB</ul>
+                     <ul>Jumat : 07.45 – 16.45 WIB</ul>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer"> ... </footer>
+ 
 
     <script src="js/script.js"></script>
 </body>

@@ -6,65 +6,342 @@
     <title>Struktur - Kelurahan Pasar Melintang</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Hero Banner Minimalis & Tombol Kembali */
+        .hero-minimal {
+            position: relative;
+            padding: 90px 20px 40px;
+            background: linear-gradient(135deg, var(--primary-color, #005f73), var(--secondary-color, #0a9396));
+            color: #ffffff;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn-back-wrapper {
+            margin: 0;
+            padding: 0;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .btn-back:hover {
+            background-color: #ffffff;
+            color: var(--primary-color, #005f73);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-text-minimal {
+            text-align: center;
+        }
+
+        .hero-text-minimal h1 {
+            font-size: 2rem;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .hero-text-minimal p {
+            font-size: 1rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* Desain Grid & Kartu Struktur */
+        .org-section {
+            padding: 60px 20px;
+            background: var(--bg-light, #f8f9fa);
+        }
+
+        .org-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .org-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .org-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--accent-color, #ee9b00);
+            transition: height 0.3s ease;
+        }
+
+        .org-card.border-secondary::before {
+            background: var(--secondary-color, #0a9396);
+        }
+
+        .org-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+/* Avatar / Foto Frame (Bentuk Persegi) */
+        .avatar-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 18px;
+            border-radius: 12px; /* Mengubah dari 50% ke 12px agar berbentuk persegi */
+            padding: 4px;
+            background: linear-gradient(135deg, var(--primary-color, #005f73), var(--secondary-color, #0a9396));
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px; /* Mengubah dari 50% ke 8px agar foto di dalam bingkai presisi persegi */
+            background-color: #f0f4f8;
+            border: 2px solid #ffffff;
+        }
+        .badge-jabatan {
+            display: inline-block;
+            padding: 4px 14px;
+            background: rgba(0, 95, 115, 0.08);
+            color: var(--primary-color, #005f73);
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .org-card h3 {
+            font-size: 1.2rem;
+            color: #2b2d42;
+            margin: 0 0 6px 0;
+            font-weight: 700;
+        }
+
+        .org-card .nip {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero-minimal {
+                padding-top: 80px;
+            }
+            .org-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar (sama seperti index.html) -->
-    <nav class="navbar"> ... </nav>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <i class="fas fa-city"></i>
+            <span>Kelurahan Pasar Melintang</span>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+            <li><a href="struktur.html"><i class="fas fa-users"></i> Struktur Organisasi</a></li>
+            <li><a href="profil.html"><i class="fas fa-info-circle"></i> Struktur RT & RW</a></li>
+            <li><a href="layanan.html"><i class="fas fa-concierge-bell"></i> Layanan</a></li>
+            <li><a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a></li>
+        </ul>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
 
-    <!-- Hero Mini -->
-    <header class="hero" style="min-height: 40vh; padding: 120px 0 60px;">
-        <div class="hero-content" style="grid-template-columns: 1fr;">
-            <div class="hero-text text-center">
+<style>
+/* Base Menu (Tidak Aktif/Transparan) */
+.nav-menu li a {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+    background: transparent !important;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Hover Menu yang Tidak Aktif */
+.nav-menu li a:hover:not(.active) {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-2px);
+}
+
+/* Tombol Aktif (Berwarna/Di-klik) */
+.nav-menu li a.active {
+    color: #ffffff !important;
+    background: var(--accent, #0a9396) !important;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const currentLocation = window.location.pathname.split("/").pop();
+    const menuItems = document.querySelectorAll("#navMenu li a");
+
+    menuItems.forEach(item => {
+        const href = item.getAttribute("href");
+        
+        // Hapus kelas active bawaan
+        item.classList.remove("active");
+        
+        // Cek halaman aktif
+        if (href === currentLocation || (currentLocation === "" && href === "index.html")) {
+            item.classList.add("active");
+        }
+    });
+});
+</script>
+
+    <!-- Hero Banner Minimalis -->
+    <header class="hero-minimal">
+        <div class="hero-container">
+            <div class="btn-back-wrapper">
+                <a href="index.html" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
+            </div>
+            <div class="hero-text-minimal">
                 <h1>Struktur Organisasi</h1>
-                <p>Susunan pemerintahan Kelurahan Pasar Melintang</p>
+                <p>Susunan Pemerintahan Kelurahan Pasar Melintang</p>
             </div>
         </div>
-        <div class="hero-wave"> ... </div>
     </header>
 
     <!-- Konten Struktur -->
-    <section style="padding: 60px 0; background: var(--white);">
+    <section class="org-section">
         <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; max-width: 1000px; margin: 0 auto;">
-                <div style="background: var(--light); padding: 30px; border-radius: var(--radius); text-align: center; border-top: 5px solid var(--accent);">
-                    <i class="fas fa-user-tie" style="font-size: 3rem; color: var(--accent);"></i>
-                    <h3 style="color: var(--primary);">Lurah</h3>
-                    <p><strong>Bapak Ahmad Fauzi, S.Sos</strong></p>
-                    <p style="font-size: 0.9rem; color: #666;">NIP. 19750812 200501 1 002</p>
+            <div class="org-grid">
+                
+                <!-- Lurah -->
+                <div class="org-card">
+                    <div class="avatar-wrapper">
+                        <img src="assets/img/lur.jpeg" alt="Foto Lurah" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=L&background=005f73&color=fff';">
+                    </div>
+                    <span class="badge-jabatan">Lurah</span>
+                    <h3>NASRUL, SKM, M. A.P</h3>
+                    <p class="nip">NIP. 19760906 199602 1 002</p>
                 </div>
-                <div style="background: var(--light); padding: 30px; border-radius: var(--radius); text-align: center; border-top: 5px solid var(--secondary);">
-                    <i class="fas fa-user" style="font-size: 3rem; color: var(--secondary);"></i>
-                    <h3 style="color: var(--primary);">Sekretaris</h3>
-                    <p><strong>Ibu Siti Rahayu, S.IP</strong></p>
-                    <p style="font-size: 0.9rem; color: #666;">NIP. 19820515 200604 2 012</p>
+
+                <!-- Sekretaris -->
+                <div class="org-card border-secondary">
+                    <div class="avatar-wrapper">
+                        <img src="assets/img/vivi.jpeg" alt="Foto Sekretaris" class="avatar-img" onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name=Seklur&background=005f73&color=fff';">
+                    </div>
+                    <span class="badge-jabatan">Sekretaris</span>
+                    <h3>ERVINA ERLIANTI, S. IP</h3>
+                    <p class="nip">NIP. 19740824 199503 2 002</p>
                 </div>
-                <div style="background: var(--light); padding: 30px; border-radius: var(--radius); text-align: center; border-top: 5px solid var(--accent);">
-                    <i class="fas fa-users" style="font-size: 3rem; color: var(--accent);"></i>
-                    <h3 style="color: var(--primary);">Kasi Pemerintahan</h3>
-                    <p><strong>Bapak Budi Santoso, S.Sos</strong></p>
+
+                <!-- Kasi Pemerintahan -->
+                <div class="org-card">
+                    <div class="avatar-wrapper">
+                        <img src="assets/img/ee.jpeg" alt="Foto Kasi Pemerintahan" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=KP&background=005f73&color=fff';">
+                    </div>
+                    <span class="badge-jabatan">Kasi Pembangunan</span>
+                    <h3>EKA NOVITRIA, SE</h3>
+                    <p class="nip">NIP. 19731101 199303 2 003</p>
                 </div>
-                <div style="background: var(--light); padding: 30px; border-radius: var(--radius); text-align: center; border-top: 5px solid var(--secondary);">
-                    <i class="fas fa-hand-holding-heart" style="font-size: 3rem; color: var(--secondary);"></i>
-                    <h3 style="color: var(--primary);">Kasi Kesra</h3>
-                    <p><strong>Ibu Dewi Lestari, S.Pd</strong></p>
+
+                <!-- Kasi Kesra -->
+                <div class="org-card border-secondary">
+                    <div class="avatar-wrapper">
+                        <img src="assets/img/ir.jpeg" alt="Foto Kasi Kesra" class="avatar-img" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=PU&background=005f73&color=fff';">
+                    </div>
+                    <span class="badge-jabatan">Kasi Pelayanan Umum 1</span>
+                    <h3>LIDYA AURUMI, SE</h3>
+                    <p class="nip">NIP. 19840613 201101 2 005 </p>
                 </div>
-                <div style="background: var(--light); padding: 30px; border-radius: var(--radius); text-align: center; border-top: 5px solid var(--accent);">
-                    <i class="fas fa-tools" style="font-size: 3rem; color: var(--accent);"></i>
-                    <h3 style="color: var(--primary);">Kasi Pelayanan</h3>
-                    <p><strong>Bapak Rudi Hartono, S.STP</strong></p>
+
+              
+
+                <!-- Kasi Pelayanan -->
+                <div class="org-card">
+                    <div class="avatar-wrapper">
+                        <img src="assets/img/rn.jpeg" 
+     alt="Foto Kasi Pelayanan" 
+     class="avatar-img" 
+     onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=PK&background=005f73&color=fff&font-size=0.45';">
+                    </div>
+                    <span class="badge-jabatan">Kasi Pemerintahan & Ketertiban Umum</span>
+                    <h3>RENNY WIDYA ASTUTI, SE</h3>
+                    <p class="nip">NIP. 19810812 200604 2 007</p>
                 </div>
-                <div style="background: var(--light); padding: 30px; border-radius: var(--radius); text-align: center; border-top: 5px solid var(--secondary);">
-                    <i class="fas fa-clipboard-list" style="font-size: 3rem; color: var(--secondary);"></i>
-                    <h3 style="color: var(--primary);">Kaur Keuangan</h3>
-                    <p><strong>Ibu Rina Marlina, S.E</strong></p>
+    <!-- Kasi Kesra -->
+                <div class="org-card border-secondary">
+                    <div class="avatar-wrapper">
+                        <img src="assets/img/sri.jpeg" alt="Foto Kasi Kesra" class="avatar-img" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=PU&background=005f73&color=fff';">
+                    </div>
+                    <span class="badge-jabatan">Staff Pelayanan Umum</span>
+                    <h3>SRI AMA YASIPUN, S.Pdi</h3>
+                    <p class="nip">NIP. 19770507 202521 2 013 </p>
                 </div>
+
+                <!-- Kaur Keuangan -->
+                <div class="org-card border-secondary">
+                    <div class="avatar-wrapper">
+                        <img src="assets/img/pa.jpeg" alt="Foto Kaur Keuangan" class="avatar-img" onerror="this.src='https://ui-avatars.com/api/?name=KU&background=005f73&color=fff';">
+                    </div>
+                    <span class="badge-jabatan">Staff Pengelola Keuangan</span>
+                    <h3>ADI PUTRA</h3>
+                    <p class="nip">NIP. 19830307 200604 1 008</p>
+                </div>
+
+                
             </div>
         </div>
     </section>
 
-    <!-- Footer (sama) -->
-    <footer class="footer"> ... </footer>
-
+    
     <script src="js/script.js"></script>
 </body>
 </html>

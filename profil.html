@@ -3,66 +3,637 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil - Kelurahan Pasar Melintang</title>
+    <title>Struktur Organisasi RT & RW - Kelurahan Pasar Melintang</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* =========================================================
+           CSS KHUSUS STRUKTUR ORGANISASI RT & RW
+           ========================================================= */
+        :root {
+            --primary-color: #005f73;
+            --secondary-color: #0a9396;
+            --accent-color: #ee9b00;
+            --bg-light: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-dark: #2b2d42;
+            --text-muted: #6c757d;
+            --border-radius: 12px;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Hero Banner Minimalis */
+        .hero-minimal {
+            position: relative;
+            min-height: auto;
+            padding: 90px 20px 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Tombol Kembali UX Optimization */
+        .btn-back-wrapper {
+            margin: 0;
+            padding: 0;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .btn-back:hover {
+            background-color: #ffffff;
+            color: var(--primary-color);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-text-minimal {
+            text-align: center;
+        }
+
+        .hero-text-minimal h1 {
+            font-size: 1.75rem;
+            margin: 0 0 6px 0;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .hero-text-minimal p {
+            font-size: 0.95rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* Container & Section Title */
+        .org-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .title-line {
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Tab Switcher Interaktif */
+        .rw-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .rw-tab-btn {
+            padding: 10px 26px;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .rw-tab-btn.active, .rw-tab-btn:hover {
+            background: var(--primary-color);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 95, 115, 0.3);
+        }
+
+        /* RW Banner Card */
+        .rw-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .rw-content.active {
+            display: block;
+        }
+
+        .rw-main-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #ffffff;
+            border-radius: var(--border-radius);
+            padding: 25px 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .rw-info h3 {
+            font-size: 1.6rem;
+            margin: 0 0 5px 0;
+        }
+
+        .rw-info h4 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin: 0;
+            opacity: 0.95;
+        }
+
+        .rw-stats-summary {
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 22px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .rw-stat-item {
+            text-align: center;
+        }
+
+        .rw-stat-item .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .rw-stat-item .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        /* RT Grid & Card */
+        .rt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 25px;
+        }
+
+        .rt-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rt-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary-color);
+        }
+
+        .rt-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .rt-badge {
+            display: inline-block;
+            background: #e0f2f1;
+            color: var(--primary-color);
+            font-weight: 700;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .rt-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .rt-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #f0f4f8;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .rt-header h4 {
+            margin: 0 0 4px 0;
+            color: var(--text-dark);
+            font-size: 1.15rem;
+        }
+
+        .rt-header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Tabel Statistik Penduduk */
+        .rt-stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .rt-stats-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .rt-stats-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .rt-stats-table td:first-child {
+            color: var(--text-muted);
+        }
+
+        .rt-stats-table td:last-child {
+            text-align: right;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsif Mobile */
+        @media (max-width: 768px) {
+            .hero-minimal {
+                padding-top: 80px;
+            }
+            .rw-main-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .rw-stats-summary {
+                width: 100%;
+                justify-content: space-around;
+            }
+            .rt-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar (copy persis dari index.html) -->
-    <nav class="navbar"> ... </nav>
 
-    <!-- HERO MINI -->
-    <header class="hero" style="min-height: 40vh; padding: 120px 0 60px;">
-        <div class="hero-content" style="grid-template-columns: 1fr;">
-            <div class="hero-text text-center">
-                <h1>Profil Kelurahan</h1>
-                <p>Mengenal lebih dalam tentang Kelurahan Pasar Melintang</p>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <i class="fas fa-city"></i>
+            <span>Kelurahan Pasar Melintang</span>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+            <li><a href="struktur.html"><i class="fas fa-users"></i> Struktur Organisasi</a></li>
+            <li><a href="profil.html"><i class="fas fa-info-circle"></i> Struktur RT & RW</a></li>
+            <li><a href="layanan.html"><i class="fas fa-concierge-bell"></i> Layanan</a></li>
+            <li><a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a></li>
+        </ul>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
+
+<style>
+/* Base Menu (Tidak Aktif/Transparan) */
+.nav-menu li a {
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+    background: transparent !important;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Hover Menu yang Tidak Aktif */
+.nav-menu li a:hover:not(.active) {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-2px);
+}
+
+/* Tombol Aktif (Berwarna/Di-klik) */
+.nav-menu li a.active {
+    color: #ffffff !important;
+    background: var(--accent, #0a9396) !important;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const currentLocation = window.location.pathname.split("/").pop();
+    const menuItems = document.querySelectorAll("#navMenu li a");
+
+    menuItems.forEach(item => {
+        const href = item.getAttribute("href");
+        
+        // Hapus kelas active bawaan
+        item.classList.remove("active");
+        
+        // Cek halaman aktif
+        if (href === currentLocation || (currentLocation === "" && href === "index.html")) {
+            item.classList.add("active");
+        }
+    });
+});
+</script>
+
+
+    <!-- HERO MINI MINIMALIS -->
+    <header class="hero-minimal">
+        <div class="hero-container">
+            <!-- TOMBOL KEMBALI DI DALAM HERO BANNER -->
+            <div class="btn-back-wrapper">
+                <a href="index.html" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Kembali 
+                </a>
+            </div>
+            
+            <div class="hero-text-minimal">
+                <h1>Struktur Organisasi RT & RW</h1>
+                <p>Data Pengurus Lembaga Kemasyarakatan Kelurahan Pasar Melintang</p>
             </div>
         </div>
-        <div class="hero-wave"> ... </div>
     </header>
 
-    <!-- KONTEN PROFIL -->
-    <section style="padding: 60px 0; background: var(--white);">
-        <div class="container">
-            <div class="section-title">
-                <h2>Sejarah</h2>
+    <!-- KONTEN STRUKTUR RT & RW -->
+    <section>
+        <div class="org-container">
+            <div class="section-header">
+                <h2>Data RT / RW & Kependudukan</h2>
                 <div class="title-line"></div>
             </div>
-            <p style="font-size: 1.1rem; line-height: 2; max-width: 800px; margin: 0 auto;">
-                Kelurahan Pasar Melintang berdiri pada tahun 1980 sebagai hasil pemekaran dari Kecamatan Melintang. 
-                Nama "Pasar Melintang" diambil dari pasar tradisional yang telah ada sejak tahun 1960-an dan menjadi 
-                pusat perekonomian masyarakat setempat. Hingga saat ini, kelurahan ini terus berkembang dengan 
-                berbagai program pelayanan publik dan pemberdayaan masyarakat.
-            </p>
-            
-            <div style="margin-top: 50px;">
-                <div class="section-title">
-                    <h2>Visi & Misi</h2>
-                    <div class="title-line"></div>
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 900px; margin: 0 auto;">
-                    <div style="background: var(--light); padding: 30px; border-radius: var(--radius); border-left: 5px solid var(--accent);">
-                        <h3 style="color: var(--primary);"><i class="fas fa-eye" style="color: var(--accent);"></i> Visi</h3>
-                        <p>"Mewujudkan Kelurahan Pasar Melintang yang Mandiri, Sejahtera, dan Berbudaya melalui Pelayanan Prima."</p>
+
+            <!-- Tab Switcher RW -->
+            <div class="rw-tabs">
+                <button class="rw-tab-btn active" onclick="switchRW('rw001', this)">
+                    <i class="fas fa-sitemap"></i> RW 001
+                </button>
+                <button class="rw-tab-btn" onclick="switchRW('rw002', this)">
+                    <i class="fas fa-sitemap"></i> RW 002
+                </button>
+            </div>
+
+            <!-- ================= KONTEN RW 001 ================= -->
+            <div id="rw001" class="rw-content active">
+                <div class="rw-main-card">
+                    <div class="rw-info">
+                        <h3>RW 001</h3>
+                        <h4>Ketua: <strong>M. RIDWAN EFFENDI</strong></h4>
                     </div>
-                    <div style="background: var(--light); padding: 30px; border-radius: var(--radius); border-left: 5px solid var(--secondary);">
-                        <h3 style="color: var(--primary);"><i class="fas fa-bullseye" style="color: var(--secondary);"></i> Misi</h3>
-                        <ul style="list-style: none; padding: 0;">
-                            <li>✓ Meningkatkan kualitas pelayanan publik</li>
-                            <li>✓ Mengembangkan potensi ekonomi masyarakat</li>
-                            <li>✓ Mewujudkan lingkungan yang bersih dan sehat</li>
-                            <li>✓ Memperkuat partisipasi masyarakat dalam pembangunan</li>
-                        </ul>
+                    <div class="rw-stats-summary">
+                        <div class="rw-stat-item">
+                            <span class="value">263</span>
+                            <span class="label">KK</span>
+                        </div>
+                        <div class="rw-stat-item">
+                            <span class="value">925</span>
+                            <span class="label">Jiwa</span>
+                        </div>
+                        <div class="rw-stat-item">
+                            <span class="value">466</span>
+                            <span class="label">Laki-Laki</span>
+                        </div>
+                        <div class="rw-stat-item">
+                            <span class="value">459</span>
+                            <span class="label">Perempuan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid RT RW 001 -->
+                <div class="rt-grid">
+                    <!-- RT 001 -->
+                    <div class="rt-card">
+                        <div class="rt-header">
+                            <span class="rt-badge">RT 001</span>
+                            <div class="rt-avatar"><i class="fas fa-user-tie"></i></div>
+                            <h4>RAHMAT RIZKY SIREGAR</h4>
+                            <p>Ketua RT 001</p>
+                        </div>
+                        <table class="rt-stats-table">
+                            <tr><td>Jumlah KK</td><td>75 KK</td></tr>
+                            <tr><td>Jumlah Penduduk</td><td>184 Jiwa</td></tr>
+                            <tr><td>Laki-Laki</td><td>142 Jiwa</td></tr>
+                            <tr><td>Perempuan</td><td>42 Jiwa</td></tr>
+                        </table>
+                    </div>
+
+                    <!-- RT 002 -->
+                    <div class="rt-card">
+                        <div class="rt-header">
+                            <span class="rt-badge">RT 002</span>
+                            <div class="rt-avatar"><i class="fas fa-user-tie"></i></div>
+                            <h4>HERINSYAH, S.H.</h4>
+                            <p>Ketua RT 002</p>
+                        </div>
+                        <table class="rt-stats-table">
+                            <tr><td>Jumlah KK</td><td>94 KK</td></tr>
+                            <tr><td>Jumlah Penduduk</td><td>330 Jiwa</td></tr>
+                            <tr><td>Laki-Laki</td><td>173 Jiwa</td></tr>
+                            <tr><td>Perempuan</td><td>157 Jiwa</td></tr>
+                        </table>
+                    </div>
+
+                    <!-- RT 003 -->
+                    <div class="rt-card">
+                        <div class="rt-header">
+                            <span class="rt-badge">RT 003</span>
+                            <div class="rt-avatar"><i class="fas fa-user-tie"></i></div>
+                            <h4>NINDHYA, S.Pd</h4>
+                            <p>Ketua RT 003</p>
+                        </div>
+                        <table class="rt-stats-table">
+                            <tr><td>Jumlah KK</td><td>49 KK</td></tr>
+                            <tr><td>Jumlah Penduduk</td><td>237 Jiwa</td></tr>
+                            <tr><td>Laki-Laki</td><td>69 Jiwa</td></tr>
+                            <tr><td>Perempuan</td><td>168 Jiwa</td></tr>
+                        </table>
+                    </div>
+
+                    <!-- RT 007 -->
+                    <div class="rt-card">
+                        <div class="rt-header">
+                            <span class="rt-badge">RT 007</span>
+                            <div class="rt-avatar"><i class="fas fa-user-tie"></i></div>
+                            <h4>Drs. SYAHRIAL</h4>
+                            <p>Ketua RT 007</p>
+                        </div>
+                        <table class="rt-stats-table">
+                            <tr><td>Jumlah KK</td><td>45 KK</td></tr>
+                            <tr><td>Jumlah Penduduk</td><td>174 Jiwa</td></tr>
+                            <tr><td>Laki-Laki</td><td>82 Jiwa</td></tr>
+                            <tr><td>Perempuan</td><td>92 Jiwa</td></tr>
+                        </table>
                     </div>
                 </div>
             </div>
+
+            <!-- ================= KONTEN RW 002 ================= -->
+            <div id="rw002" class="rw-content">
+                <div class="rw-main-card">
+                    <div class="rw-info">
+                        <h3>RW 002</h3>
+                        <h4>Ketua: <strong>DEDE AGUS</strong></h4>
+                    </div>
+                    <div class="rw-stats-summary">
+                        <div class="rw-stat-item">
+                            <span class="value">184</span>
+                            <span class="label">KK</span>
+                        </div>
+                        <div class="rw-stat-item">
+                            <span class="value">450</span>
+                            <span class="label">Jiwa</span>
+                        </div>
+                        <div class="rw-stat-item">
+                            <span class="value">240</span>
+                            <span class="label">Laki-Laki</span>
+                        </div>
+                        <div class="rw-stat-item">
+                            <span class="value">210</span>
+                            <span class="label">Perempuan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid RT RW 002 -->
+                <div class="rt-grid">
+                    <!-- RT 004 -->
+                    <div class="rt-card">
+                        <div class="rt-header">
+                            <span class="rt-badge">RT 004</span>
+                            <div class="rt-avatar"><i class="fas fa-user-tie"></i></div>
+                            <h4>Drs. HERU SUSANTO</h4>
+                            <p>Ketua RT 004</p>
+                        </div>
+                        <table class="rt-stats-table">
+                            <tr><td>Jumlah KK</td><td>50 KK</td></tr>
+                            <tr><td>Jumlah Penduduk</td><td>138 Jiwa</td></tr>
+                            <tr><td>Laki-Laki</td><td>66 Jiwa</td></tr>
+                            <tr><td>Perempuan</td><td>72 Jiwa</td></tr>
+                        </table>
+                    </div>
+
+                    <!-- RT 005 -->
+                    <div class="rt-card">
+                        <div class="rt-header">
+                            <span class="rt-badge">RT 005</span>
+                            <div class="rt-avatar"><i class="fas fa-user-tie"></i></div>
+                            <h4>MARIA AFRIYANTI, A.md</h4>
+                            <p>Ketua RT 005</p>
+                        </div>
+                        <table class="rt-stats-table">
+                            <tr><td>Jumlah KK</td><td>45 KK</td></tr>
+                            <tr><td>Jumlah Penduduk</td><td>87 Jiwa</td></tr>
+                            <tr><td>Laki-Laki</td><td>50 Jiwa</td></tr>
+                            <tr><td>Perempuan</td><td>37 Jiwa</td></tr>
+                        </table>
+                    </div>
+
+                    <!-- RT 006 -->
+                    <div class="rt-card">
+                        <div class="rt-header">
+                            <span class="rt-badge">RT 006</span>
+                            <div class="rt-avatar"><i class="fas fa-user-tie"></i></div>
+                            <h4>ANSORI ANTAU</h4>
+                            <p>Ketua RT 006</p>
+                        </div>
+                        <table class="rt-stats-table">
+                            <tr><td>Jumlah KK</td><td>89 KK</td></tr>
+                            <tr><td>Jumlah Penduduk</td><td>225 Jiwa</td></tr>
+                            <tr><td>Laki-Laki</td><td>124 Jiwa</td></tr>
+                            <tr><td>Perempuan</td><td>101 Jiwa</td></tr>
+                        </table>
+                    </div>
+
+        
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- FOOTER (copy persis dari index.html) -->
-    <footer class="footer"> ... </footer>
+  
 
     <script src="js/script.js"></script>
+    <script>
+        // JS Switch Tab RW Interaktif
+        function switchRW(rwId, btnElement) {
+            const contents = document.querySelectorAll('.rw-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.rw-tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(rwId).classList.add('active');
+            btnElement.classList.add('active');
+        }
+    </script>
 </body>
 </html>
