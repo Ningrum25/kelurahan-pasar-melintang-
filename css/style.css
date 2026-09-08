@@ -75,7 +75,7 @@ body {
 }
 
 .nav-logo i {
-    color: var(--accent, #0a9396);
+    color: #f39c12; /* Warna kuning ikon logo */
     font-size: 1.8rem;
 }
 
@@ -113,12 +113,12 @@ body {
     transform: translateY(-2px);
 }
 
-/* Style Khusus Tombol Menu Aktif (Diklik) */
+/* Style Khusus Tombol Menu Aktif (Diklik) - Berwarna Kuning */
 .nav-menu li a.active {
-    color: var(--white, #ffffff);
-    background: var(--accent, #0a9396);
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #062233; /* Warna teks gelap agar sangat kontras di atas tombol kuning */
+    background: #f39c12; /* Latar tombol warna kuning keemasan */
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.35);
 }
 
 .nav-toggle {
