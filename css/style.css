@@ -75,7 +75,7 @@ body {
 }
 
 .nav-logo i {
-    color: #f39c12; /* Warna kuning ikon logo */
+    color: #f39c12;
     font-size: 1.8rem;
 }
 
@@ -88,7 +88,6 @@ body {
     padding: 0;
 }
 
-/* Base style menu (tidak berwarna / transparan) */
 .nav-menu li a {
     color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
@@ -106,17 +105,15 @@ body {
     margin-right: 6px;
 }
 
-/* Efek Hover untuk menu yang TIDAK aktif */
 .nav-menu li a:hover:not(.active) {
     color: var(--white, #ffffff);
     background: rgba(255, 255, 255, 0.15);
     transform: translateY(-2px);
 }
 
-/* Style Khusus Tombol Menu Aktif (Diklik) - Berwarna Kuning */
 .nav-menu li a.active {
-    color: #062233; /* Warna teks gelap agar sangat kontras di atas tombol kuning */
-    background: #f39c12; /* Latar tombol warna kuning keemasan */
+    color: #062233;
+    background: #f39c12;
     font-weight: 700;
     box-shadow: 0 4px 12px rgba(243, 156, 18, 0.35);
 }
@@ -127,6 +124,7 @@ body {
     font-size: 1.8rem;
     cursor: pointer;
 }
+
 /* ============ HERO ============ */
 .hero {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--secondary) 100%);
@@ -393,11 +391,11 @@ body {
 
 .gallery-item {
     position: relative;
-    height: 280px; /* Ukuran kartu tetap sama & seragam */
+    height: 280px;
     border-radius: var(--radius);
     overflow: hidden;
     cursor: pointer;
-    background: #ffffff; /* Latar belakang putih bersih menggantikan latar hitam */
+    background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -409,7 +407,7 @@ body {
     max-height: 100%;
     width: auto;
     height: auto;
-    object-fit: contain; /* Foto tetap utuh tidak terpotong */
+    object-fit: contain;
     transition: var(--transition);
 }
 
